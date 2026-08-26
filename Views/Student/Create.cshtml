@@ -1,0 +1,86 @@
+@model ASPNETCore_DB.Models.Student
+
+@{
+    ViewData["Title"] = "Enroll Student";
+}
+
+<div class="animate-fade-up" style="max-width:680px;margin:0 auto;">
+    <div style="margin-bottom:1.5rem;">
+        <a asp-action="Index" class="back-link">Back to Students</a>
+    </div>
+
+    <h1> Enroll Student</h1>
+    <h4>Complete the form below to register a new student</h4>
+    <hr />
+
+    <div class="form-card">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="StudentNumber" class="control-label"> Student Number</label>
+                        <input asp-for="StudentNumber" class="form-control" placeholder="e.g. 2024000001" />
+                        <span asp-validation-for="StudentNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="EnrollmentDate" class="control-label"> Enrollment Date</label>
+                        <input asp-for="EnrollmentDate" class="form-control" type="date" />
+                        <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"> First Name</label>
+                        <input asp-for="FirstName" class="form-control" placeholder="First name" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Surname" class="control-label"> Surname</label>
+                        <input asp-for="Surname" class="form-control" placeholder="Surname" />
+                        <span asp-validation-for="Surname" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"> Contact Email</label>
+                <input asp-for="Email" class="form-control" placeholder="student@example.com" type="email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label"> Profile Photo</label>
+                <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:0.5rem;">
+                    <img src="@WebConstants.ImagePath@Model.Photo" class="photo-preview-lg"
+                         alt="Preview" id="photoPreview" />
+                    <div style="flex:1;min-width:200px;">
+                        <input type="file" name="files" id="uploadBox" class="form-control" accept="image/*" />
+                        <p style="font-size:0.78rem;color:var(--gray-400);margin-top:0.4rem;">
+                            Accepted: JPG, PNG, GIF — Max 5MB
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <hr style="margin:1.5rem 0;" />
+
+            <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+                <button type="submit" class="btn btn-primary"> Enroll Student</button>
+                <a asp-action="Index" class="btn btn-outline-primary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

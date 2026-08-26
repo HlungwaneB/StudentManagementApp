@@ -1,0 +1,63 @@
+@model ASPNETCore_DB.Models.Student
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<div class="animate-fade-up" style="max-width:700px;margin:0 auto;">
+    <div style="margin-bottom:1.5rem;">
+        <a asp-action="Index" class="back-link">Back to Students</a>
+    </div>
+
+    <h1>Student Details</h1>
+    <hr />
+
+    <div class="detail-card">
+        <div class="detail-header">
+            <img src="@WebConstants.ImagePath@Model.Photo" alt="@Model.FirstName @Model.Surname" />
+            <div>
+                <h2 style="-webkit-text-fill-color:white;background:none;color:white;font-size:1.6rem;margin-bottom:0.25rem;">
+                    @Model.FirstName @Model.Surname
+                </h2>
+                <p style="margin:0;opacity:0.85;font-size:0.92rem;">Student No: @Model.StudentNumber</p>
+                <p style="margin:0.25rem 0 0;opacity:0.75;font-size:0.85rem;">
+                     Enrolled: @Model.EnrollmentDate.ToString("dd MMM yyyy")
+                </p>
+            </div>
+        </div>
+
+        <div class="detail-body">
+            <div class="detail-row">
+                <span class="detail-label">Student No</span>
+                <span class="detail-value" style="color:var(--primary);font-weight:700;">@Model.StudentNumber</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">First Name</span>
+                <span class="detail-value">@Model.FirstName</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Surname</span>
+                <span class="detail-value">@Model.Surname</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Enrolled</span>
+                <span class="detail-value">@Model.EnrollmentDate.ToString("dd MMMM yyyy")</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Email</span>
+                <span class="detail-value">
+                    <a href="mailto:@Model.Email" style="color:var(--info);text-decoration:none;">@Model.Email</a>
+                </span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Photo</span>
+                <span class="detail-value">@Model.Photo</span>
+            </div>
+        </div>
+
+        <div style="padding:1.25rem 2rem;border-top:1px solid var(--gray-100);display:flex;gap:0.75rem;flex-wrap:wrap;">
+            <a asp-action="Edit" asp-route-id="@Model.StudentNumber" class="btn btn-primary btn-sm">Edit</a>
+            <a asp-action="Index" class="btn btn-outline-primary btn-sm">← Back to List</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="hero-section animate-fade-up">
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-title">Student Management System</div>
+        <p class="hero-subtitle">
+            A modern platform for enrolling, managing and authenticating students — built with ASP.NET Core MVC.
+        </p>
+    </div>
+</div>
+
+@if (ViewData["UserID"] != null && ViewData["UserID"].ToString() != "")
+{
+    <div class="user-info-card animate-fade-up" style="animation-delay:0.15s">
+        <h5 style="font-family:'Poppins',sans-serif;font-weight:700;margin-bottom:1.1rem;color:var(--gray-800);">
+            Session Info
+        </h5>
+        <div class="user-info-row">
+            <span class="user-info-label">User ID</span>
+            <span class="user-info-value" style="font-size:0.78rem;word-break:break-all">@ViewData["UserID"]</span>
+        </div>
+        <div class="user-info-row">
+            <span class="user-info-label">Username</span>
+            <span class="user-info-value">@ViewData["UserName"]</span>
+        </div>
+        <div class="user-info-row">
+            <span class="user-info-label">Role</span>
+            <span class="user-info-value">
+                @{
+                    var role = ViewData["UserRole"]?.ToString() ?? "";
+                }
+                @if (role == "Admin")
+                {
+                    <span class="role-badge admin">Admin</span>
+                }
+                else if (role == "User")
+                {
+                    <span class="role-badge user">User</span>
+                }
+                else
+                {
+                    <span style="color:var(--gray-400);font-size:0.85rem">— not assigned —</span>
+                }
+            </span>
+        </div>
+    </div>
+}
+else
+{
+    <div class="text-center animate-fade-up" style="animation-delay:0.2s">
+        <div class="welcome-card">
+            <div class="welcome-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <h4>Welcome!</h4>
+            <p>Please log in or register to access the Student Management System.</p>
+            <div class="welcome-actions">
+                <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary">Login</a>
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-primary">Register</a>
+            </div>
+        </div>
+    </div>
+}

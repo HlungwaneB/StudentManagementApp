@@ -1,0 +1,47 @@
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<div class="animate-fade-up" style="max-width:800px;margin:0 auto;">
+    <h1> @ViewData["Title"]</h1>
+    <hr />
+
+    <div class="privacy-wrapper">
+        <h5 style="font-family:'Poppins',sans-serif;font-weight:700;color:var(--primary);margin-bottom:0.75rem;">
+            Our Commitment to Your Privacy
+        </h5>
+        <p style="color:var(--gray-600);margin-bottom:1.5rem;line-height:1.8;">
+            The Student Management System takes your privacy seriously. This page outlines how personal
+            data collected through this platform is handled, stored, and protected in accordance with
+            applicable data protection legislation.
+        </p>
+
+        <h6 style="font-weight:700;color:var(--gray-800);margin-bottom:0.5rem;">Data We Collect</h6>
+        <ul style="color:var(--gray-600);line-height:2;margin-bottom:1.25rem;padding-left:1.5rem;">
+            <li>Student identification numbers and personal details</li>
+            <li>Contact email addresses</li>
+            <li>Profile photographs uploaded by users</li>
+            <li>Enrollment dates and academic records</li>
+            <li>Authentication credentials (encrypted at rest)</li>
+        </ul>
+
+        <h6 style="font-weight:700;color:var(--gray-800);margin-bottom:0.5rem;">How We Use Your Data</h6>
+        <p style="color:var(--gray-600);line-height:1.8;margin-bottom:1.25rem;">
+            Data is used solely for academic administration purposes within the institution.
+            We do not share, sell, or distribute personal information to third parties.
+        </p>
+
+        <h6 style="font-weight:700;color:var(--gray-800);margin-bottom:0.5rem;">Security</h6>
+        <p style="color:var(--gray-600);line-height:1.8;">
+            All passwords are hashed using ASP.NET Core Identity. Data is stored in a secure
+            SQLite database. Role-based access control ensures only authorised users can
+            view or modify records.
+        </p>
+
+        <div style="margin-top:2rem;padding:1rem 1.25rem;background:rgba(79,70,229,0.06);border-radius:var(--radius-sm);border-left:4px solid var(--primary);">
+            <p style="margin:0;font-size:0.88rem;color:var(--gray-600);">
+                 Last updated: January 2026 &nbsp;|&nbsp; SOD316C — Software Development III
+            </p>
+        </div>
+    </div>
+</div>

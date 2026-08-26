@@ -1,0 +1,112 @@
+@model PaginatedList<ASPNETCore_DB.Models.Student>
+
+@{
+    ViewData["Title"] = "Students";
+}
+
+<div class="animate-fade-up">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+        <div>
+            <h1> Enrolled Students</h1>
+            <p style="color:var(--gray-600);font-size:0.9rem;margin:0;">
+                Manage and view all student enrollments
+            </p>
+        </div>
+        <a asp-action="Create" class="btn btn-primary">
+             Enroll New Student
+        </a>
+    </div>
+
+    <form asp-action="Index" method="get" class="form-inline">
+        <label style="margin-bottom:0;color:var(--gray-600);font-size:0.88rem;"> Search:</label>
+        <input type="text" name="searchString" value="@ViewData["CurrentFilter"]"
+               class="form-control" style="max-width:240px;" placeholder="Student number..." />
+        <button type="submit" class="btn btn-primary btn-sm">Search</button>
+        <a asp-action="Index" class="btn btn-outline-primary btn-sm">Reset</a>
+    </form>
+
+    <div class="table-wrapper stagger">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <a asp-action="Index"
+                           asp-route-sortOrder="@ViewData["StudentNumberSortParm"]"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                            # Student No
+                        </a>
+                    </th>
+                    <th>First Name</th>
+                    <th>
+                        <a asp-action="Index"
+                           asp-route-sortOrder="@ViewData["NameSortParm"]"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                            Surname ↕
+                        </a>
+                    </th>
+                    <th>
+                        <a asp-action="Index"
+                           asp-route-sortOrder="@ViewData["DateSortParm"]"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                            Enrolled ↕
+                        </a>
+                    </th>
+                    <th>Photo</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.StudentNumber)</td>
+                        <td>@Html.DisplayFor(m => item.FirstName)</td>
+                        <td>@Html.DisplayFor(m => item.Surname)</td>
+                        <td style="font-size:0.85rem;color:var(--gray-500);">
+                            @item.EnrollmentDate.ToString("yyyy/MM/dd")
+                        </td>
+                        <td>
+                            <img src="@WebConstants.ImagePath@item.Photo"
+                                 class="student-photo"
+                                 alt="@item.FirstName @item.Surname" />
+                        </td>
+                        <td style="font-size:0.85rem;">
+                            <a href="mailto:@item.Email" style="color:var(--info);text-decoration:none;">
+                                @Html.DisplayFor(m => item.Email)
+                            </a>
+                        </td>
+                        <td>
+                            <div class="action-links">
+                                <a asp-action="Edit" asp-route-id="@item.StudentNumber" class="link-edit">Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.StudentNumber" class="link-details">Details</a>
+                                <a asp-action="Delete" asp-route-id="@item.StudentNumber" class="link-delete">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="7" style="text-align:center;padding:3rem;color:var(--gray-400);">
+                            <div style="font-size:2.5rem;margin-bottom:0.5rem;"></div>
+                            No students found. <a asp-action="Create" style="color:var(--primary);">Enroll one?</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagination-wrapper">
+        <input type="button" value="← Previous"
+               onclick="location.href='@Url.Action("Index", new { pageNumber = Model.PageIndex - 1, currentFilter = ViewData["CurrentFilter"] })'"
+               @(Model.HasPreviousPage ? "" : "disabled") />
+        <span style="display:flex;align-items:center;font-size:0.85rem;color:var(--gray-500);font-weight:600;">
+            Page @Model.PageIndex
+        </span>
+        <input type="button" value="Next →"
+               onclick="location.href='@Url.Action("Index", new { pageNumber = Model.PageIndex + 1, currentFilter = ViewData["CurrentFilter"] })'"
+               @(Model.HasNextPage ? "" : "disabled") />
+    </div>
+</div>

@@ -1,0 +1,65 @@
+@model ASPNETCore_DB.Models.Student
+
+@{
+    ViewData["Title"] = "Delete Student";
+}
+
+<div class="animate-fade-up" style="max-width:600px;margin:0 auto;">
+    <div style="margin-bottom:1.5rem;">
+        <a asp-action="Index" class="back-link">Back to Students</a>
+    </div>
+
+    <h1 style="background:linear-gradient(135deg,#ef4444,#b91c1c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+         Delete Student
+    </h1>
+    <hr style="background:linear-gradient(90deg,#ef4444,#b91c1c,transparent);" />
+
+    <div class="delete-card">
+        <div class="delete-header">
+            <span style="font-size:2rem;"></span>
+            <div>
+                <h4 style="margin:0;color:white;font-family:'Poppins',sans-serif;">Are you sure?</h4>
+                <p style="margin:0;opacity:0.85;font-size:0.88rem;">
+                    This action cannot be undone. The student record will be permanently removed.
+                </p>
+            </div>
+        </div>
+
+        <div class="delete-body">
+            <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+                <img src="@WebConstants.ImagePath@Model.Photo"
+                     style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid rgba(239,68,68,0.2);box-shadow:0 4px 12px rgba(239,68,68,0.2);"
+                     alt="Student Photo" />
+                <div>
+                    <div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:1.2rem;color:var(--gray-900);">
+                        @Model.FirstName @Model.Surname
+                    </div>
+                    <div style="color:var(--gray-500);font-size:0.88rem;">@Model.StudentNumber</div>
+                </div>
+            </div>
+
+            <div style="background:var(--gray-100);border-radius:var(--radius-sm);padding:1rem;margin-bottom:1.5rem;">
+                <div class="detail-row" style="padding:0.5rem 0;">
+                    <span class="detail-label">Surname</span>
+                    <span class="detail-value">@Model.Surname</span>
+                </div>
+                <div class="detail-row" style="padding:0.5rem 0;">
+                    <span class="detail-label">Enrolled</span>
+                    <span class="detail-value">@Model.EnrollmentDate.ToString("dd MMM yyyy")</span>
+                </div>
+                <div class="detail-row" style="padding:0.5rem 0;border-bottom:none;">
+                    <span class="detail-label">Email</span>
+                    <span class="detail-value">@Model.Email</span>
+                </div>
+            </div>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="StudentNumber" />
+                <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                    <a asp-action="Index" class="btn btn-outline-primary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
